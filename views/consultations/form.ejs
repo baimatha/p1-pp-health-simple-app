@@ -1,0 +1,44 @@
+<form action="/consultation/request" method="POST" class="card p-4 shadow-sm">
+  <div class="mb-3">
+    <label for="specialty" class="form-label">Choose Specialty</label>
+    <select class="form-select" id="specialty" name="specialty" required>
+      <option value="">-- Select Specialty --</option>
+      <% specialties.forEach(s => { %>
+        <option value="<%= s.specialty %>"><%= s.specialty %></option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="doctorId" class="form-label">Choose Doctor</label>
+    <select class="form-select" id="doctorId" name="doctorId" required>
+      <option value="">-- Select Doctor --</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="reason" class="form-label">Reason</label>
+    <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-success w-100">Send Request</button>
+</form>
+
+<script>
+  document.getElementById("specialty").addEventListener("change", async function() {
+    const specialty = this.value;
+    const doctorSelect = document.getElementById("doctorId");
+    doctorSelect.innerHTML = '<option value="">-- Select Doctor --</option>';
+
+    if (specialty) {
+      const res = await fetch(`/api/doctors?specialty=${encodeURIComponent(specialty)}`);
+      const doctors = await res.json();
+      doctors.forEach(d => {
+        const opt = document.createElement("option");
+        opt.value = d.id;
+        opt.textContent = d.name;
+        doctorSelect.appendChild(opt);
+      });
+    }
+  });
+</script>

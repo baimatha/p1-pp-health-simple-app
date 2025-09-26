@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <h2>Doctor Detail</h2>
+  <div class="card p-4 shadow-sm">
+    <p><strong>Name:</strong> <%= doctor.name %></p>
+    <p><strong>Specialty:</strong> <%= doctor.specialty %></p>
+    <p><strong>Email:</strong> <%= doctor.User.email %></p>
+    <p><strong>Phone:</strong> <%= doctor.phone || '-' %></p>
+    <p><strong>License Number:</strong> <%= doctor.license_number %></p>
+    <p><strong>Doctor Code:</strong> <%= doctor.doctorCode %></p>
+  </div>
+
+  <a href="/admin/doctors" class="btn btn-secondary mt-3">Back to List</a>
+</div>

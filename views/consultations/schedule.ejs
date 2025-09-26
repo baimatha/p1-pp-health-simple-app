@@ -1,0 +1,15 @@
+<h2 class="mb-4">Schedule Consultation for <%= patient.name %></h2>
+
+<form action="/consultation/<%= patient.id %>/schedule" method="POST" class="card p-4 shadow-sm">
+  <div class="mb-3">
+    <label for="appointmentDate" class="form-label">Appointment Date</label>
+    <input type="datetime-local" class="form-control" id="appointmentDate" name="appointmentDate" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="reason" class="form-label">Reason</label>
+    <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Schedule</button>
+</form>

@@ -1,0 +1,48 @@
+<h2 class="mb-4">
+  <%= appointment ? "Edit Appointment" : "Add Appointment" %>
+</h2>
+
+<form action="<%= action %>" method="POST" class="card p-4 shadow-sm">
+  <div class="mb-3">
+    <label for="patientId" class="form-label">Patient</label>
+    <select class="form-select" id="patientId" name="patientId" required>
+      <option value="">-- Select Patient --</option>
+      <% patients.forEach(p=> { %>
+        <option value="<%= p.id %>" <%=(appointment && appointment.patientId===p.id) || (preselectedPatientId &&
+          preselectedPatientId==p.id) ? "selected" : "" %>>
+          <%= p.name %> (<%= p.User.email %>)
+        </option>
+        <% }) %>
+    </select>
+
+
+  </div>
+
+  <div class="mb-3">
+    <label for="doctorId" class="form-label">Doctor</label>
+    <select class="form-select" id="doctorId" name="doctorId" required>
+      <option value="">-- Select Doctor --</option>
+      <% doctors.forEach(d=> { %>
+        <option value="<%= d.id %>" <%=appointment && appointment.doctorId===d.id ? "selected" : "" %>>
+          <%= d.name %>
+        </option>
+        <% }) %>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="appointmentDate" class="form-label">Date</label>
+    <input type="datetime-local" class="form-control" id="appointmentDate" name="appointmentDate"
+      value="<%= appointment ? appointment.appointmentDate.toISOString().slice(0,16) : '' %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="reason" class="form-label">Reason</label>
+    <textarea class="form-control" id="reason" name="reason" rows="3"
+      required><%= appointment ? appointment.reason : '' %></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-success w-100">
+    <%= appointment ? "Update Appointment" : "Create Appointment" %>
+  </button>
+</form>

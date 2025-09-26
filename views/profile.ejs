@@ -1,0 +1,31 @@
+<h2 class="mb-4">My Profile</h2>
+
+<form action="/profile" method="POST" class="card p-4 shadow-sm">
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username" name="username" value="<%= user.username %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+  </div>
+
+  <% if (session.user.role==="patient" ) { %>
+    <div class="mb-3">
+      <label for="dateOfBirth" class="form-label">Date of Birth</label>
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+        value="<%= user.Patient?.dateOfBirth ? user.Patient.dateOfBirth.toISOString().slice(0,10) : '' %>" required>
+    </div>
+    <% } %>
+
+      <% if (session.user.role==="doctor" ) { %>
+        <div class="mb-3">
+          <label for="specialty" class="form-label">Specialty</label>
+          <input type="text" class="form-control" id="specialty" name="specialty" value="<%= user.Doctor?.specialty %>"
+            required>
+        </div>
+        <% } %>
+
+          <button type="submit" class="btn btn-success w-100">Update Profile</button>
+</form>

@@ -1,0 +1,44 @@
+<h2 class="mb-4">Inbox</h2>
+
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>From</th>
+      <th>Subject</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (messages.length===0) { %>
+      <tr>
+        <td colspan="6" class="text-center">No messages</td>
+      </tr>
+      <% } else { %>
+        <% messages.forEach((msg, idx)=> { %>
+          <tr>
+            <td>
+              <%= idx + 1 %>
+            </td>
+            <td>
+              <%= msg.User ? msg.User.username : '-' %>
+            </td>
+            <td>
+              <%= msg.title %>
+            </td>
+            <td>
+              <%= msg.createdAt.toLocaleString() %>
+            </td>
+            <td>
+              <%= msg.isRead ? "Read" : "Unread" %>
+            </td>
+            <td>
+              <a href="/inbox/<%= msg.id %>/read" class="btn btn-sm btn-primary">Open</a>
+            </td>
+          </tr>
+          <% }) %>
+            <% } %>
+  </tbody>
+</table>

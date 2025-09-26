@@ -1,0 +1,30 @@
+<h2 class="mb-4">Doctor Dashboard</h2>
+<p>Welcome, Dr. <%= doctor.name %></p>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>Upcoming Appointments</h4>
+    <ul class="list-group">
+      <% if (doctor.Appointments && doctor.Appointments.length > 0) { %>
+        <% doctor.Appointments.forEach(a => { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong><%= new Date(a.appointmentDate).toLocaleString() %></strong><br>
+              Patient: <%= a.Patient ? a.Patient.name : '' %><br>
+              Reason: <%= a.reason %>
+            </div>
+            <a href="/appointments/<%= a.id %>" class="btn btn-sm btn-info">View Detail</a>
+          </li>
+        <% }) %>
+      <% } else { %>
+        <li class="list-group-item">No appointments scheduled yet.</li>
+      <% } %>
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <h4>Inbox</h4>
+    <a href="/inbox" class="btn btn-outline-primary">Go to Inbox</a>
+    <p class="text-muted mt-2">Check consultation requests from patients here.</p>
+  </div>
+</div>

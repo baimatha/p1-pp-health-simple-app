@@ -1,0 +1,93 @@
+<h2 class="mb-4">
+  <%= doctor ? "Edit Doctor" : "Add Doctor" %>
+</h2>
+
+<form action="<%= action %>" method="POST" class="card p-4 shadow-sm needs-validation" novalidate>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" value="<%= doctor ? doctor.name : '' %>" required>
+    <div class="invalid-feedback">Please enter doctor name.</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Preview Gelar</label>
+    <p id="previewName" class="fw-bold text-primary"></p>
+  </div>
+
+  <div class="mb-3">
+    <label for="specialty" class="form-label">Specialty</label>
+    <select class="form-select" id="specialty" name="specialty" required>
+      <option value="">-- Select Specialty --</option>
+      <option value="Cardiology" <%=doctor && doctor.specialty==="Cardiology" ? "selected" : "" %>>Cardiology</option>
+      <option value="Pediatrics" <%=doctor && doctor.specialty==="Pediatrics" ? "selected" : "" %>>Pediatrics</option>
+      <option value="InternalMedicine" <%=doctor && doctor.specialty==="InternalMedicine" ? "selected" : "" %>>Internal
+        Medicine</option>
+      <option value="Neurology" <%=doctor && doctor.specialty==="Neurology" ? "selected" : "" %>>Neurology</option>
+      <option value="Dermatology" <%=doctor && doctor.specialty==="Dermatology" ? "selected" : "" %>>Dermatology
+      </option>
+    </select>
+    <div class="invalid-feedback">Please select specialty.</div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="phone" class="form-label">Phone Number</label>
+    <input type="text" class="form-control" id="phone" name="phone" value="<%= doctor ? doctor.phone : '' %>">
+    <div class="invalid-feedback">Please enter phone number.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="license_number" class="form-label">License Number</label>
+    <input type="text" class="form-control" id="license_number" name="license_number"
+      value="<%= doctor ? doctor.license_number : '' %>" required>
+    <div class="invalid-feedback">Please enter license number.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username" name="username"
+      value="<%= doctor && doctor.User ? doctor.User.username : '' %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email"
+      value="<%= doctor && doctor.User ? doctor.User.email : '' %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" value="" <%=doctor ? "" : "required" %>
+    >
+  </div>
+
+
+  <button type="submit" class="btn btn-success w-100">
+    <%= doctor ? "Update Doctor" : "Create Doctor" %>
+  </button>
+</form>
+
+<script>
+  const specialtySuffix = {
+    Cardiology: "Sp.JP",
+    Pediatrics: "Sp.A",
+    InternalMedicine: "Sp.PD",
+    Neurology: "Sp.S",
+    Dermatology: "Sp.KK"
+  };
+
+  const nameInput = document.getElementById("name");
+  const specialtySelect = document.getElementById("specialty");
+  const preview = document.getElementById("previewName");
+
+  function updatePreview() {
+    const name = nameInput.value.trim();
+    const specialty = specialtySelect.value;
+    const suffix = specialtySuffix[specialty] || "";
+    preview.textContent = name ? `dr. ${name}${suffix ? ", " + suffix : ""}` : "";
+  }
+
+  nameInput.addEventListener("input", updatePreview);
+  specialtySelect.addEventListener("change", updatePreview);
+
+  updatePreview();
+</script>

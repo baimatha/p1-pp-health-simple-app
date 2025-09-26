@@ -1,0 +1,33 @@
+<h2>
+    <%= title %>
+</h2>
+
+<form action="/patients/complete-profile" method="POST">
+    <div class="mb-3">
+        <label>Date of Birth</label>
+        <input type="date" name="dateOfBirth" class="form-control"
+            value="<%= patient?.dateOfBirth ? new Date(patient.dateOfBirth).toISOString().slice(0,10) : '' %>" required>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Gender</label>
+        <select name="gender" class="form-control" required>
+            <option value="">-- Select --</option>
+            <option value="Male" <%=patient?.gender==="Male" ? "selected" : "" %>>Male</option>
+            <option value="Female" <%=patient?.gender==="Female" ? "selected" : "" %>>Female</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Blood Type</label>
+        <input type="text" name="bloodType" class="form-control" value="<%= patient?.bloodType || '' %>">
+    </div>
+
+    <div class="mb-3">
+        <label>Height (cm)</label>
+        <input type="number" name="height" class="form-control" value="<%= patient?.height || '' %>">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

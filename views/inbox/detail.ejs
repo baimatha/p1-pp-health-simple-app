@@ -1,0 +1,20 @@
+<h2>
+    <%= message.title %>
+</h2>
+
+<p><strong>From:</strong>
+    <%= message.Patient ? message.Patient.name : message.User.username %>
+        <% if (message.Patient && message.Patient.User) { %>
+            (<%= message.Patient.User.email %>)
+                <% } %>
+</p>
+
+<p><strong>Date:</strong>
+    <%= message.createdAt.toLocaleString() %>
+</p>
+
+<p><strong>Message:</strong>
+    <%= message.content %>
+</p>
+
+<a href="/inbox" class="btn btn-secondary mt-3">Back to Inbox</a>

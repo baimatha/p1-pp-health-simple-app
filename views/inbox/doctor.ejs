@@ -1,0 +1,32 @@
+<% if (messages && messages.length> 0) { %>
+  <% messages.forEach(message=> { %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= message.title %>
+        </h5>
+        <p><strong>From:</strong>
+          <%= message.Patient ? message.Patient.name : message.User.username %>
+        </p>
+        <small class="text-muted">
+          <%= message.createdAt.toLocaleString() %>
+        </small>
+        <p class="mt-2">
+          <%= message.content %>
+        </p>
+
+        <% if (message.title && message.title.includes("Consultation")) { %>
+          <a href="/appointments/add?patientId=<%= message.PatientId %>" class="btn btn-sm btn-success">
+            Schedule Consultation
+          </a>
+          <% } %>
+
+
+
+            <a href="/inbox/<%= message.id %>" class="btn btn-sm btn-info">View</a>
+      </div>
+    </div>
+    <% }) %>
+      <% } else { %>
+        <p>No messages found.</p>
+        <% } %>

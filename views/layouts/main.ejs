@@ -1,0 +1,9 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar', { user: session.user }) %>
+<%- include('../partials/flash', { flash: flash }) %>
+
+<main class="container">
+  <%- body %>
+</main>
+
+<%- include('../partials/footer') %>

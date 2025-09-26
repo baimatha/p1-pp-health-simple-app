@@ -1,0 +1,21 @@
+<h2 class="mb-4">Welcome, <%= patient.name %></h2>
+
+<a href="/consultation/start" class="btn btn-primary mb-3">Ask for Consultation</a>
+
+<h4>Your Appointments</h4>
+<ul class="list-group">
+  <% if (patient.Appointments && patient.Appointments.length > 0) { %>
+    <% patient.Appointments.forEach(a => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong><%= new Date(a.appointmentDate).toLocaleString() %></strong><br>
+          With Dr. <%= a.Doctor ? a.Doctor.name : '' %><br>
+          Reason: <%= a.reason %>
+        </div>
+        <a href="/appointments/<%= a.id %>" class="btn btn-sm btn-info">View Detail</a>
+      </li>
+    <% }) %>
+  <% } else { %>
+    <li class="list-group-item">No appointments yet. Request a consultation to get started.</li>
+  <% } %>
+</ul>

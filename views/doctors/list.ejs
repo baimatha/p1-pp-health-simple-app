@@ -1,0 +1,49 @@
+<h2 class="mb-4">Doctors</h2>
+
+<a href="/admin/doctors/add" class="btn btn-primary mb-3">+ Add Doctor</a>
+
+<% const suffixMap={ Cardiology: "Sp.JP" , Pediatrics: "Sp.A" , InternalMedicine: "Sp.PD" , Neurology: "Sp.S" ,
+  Dermatology: "Sp.KK" }; %>
+
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Specialization</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (doctors.length===0) { %>
+        <tr>
+          <td colspan="5" class="text-center">No doctors found</td>
+        </tr>
+        <% } else { %>
+          <% doctors.forEach((doc, idx)=> { %>
+            <tr>
+              <td>
+                <%= idx + 1 %>
+              </td>
+              <td>
+                <%= doc.doctorCode %>
+              </td>
+              <td>
+                dr. <%= doc.name %>
+                  <%= suffixMap[doc.specialty] ? ", " + suffixMap[doc.specialty] : "" %>
+              </td>
+              <td>
+                <%= doc.specialty %>
+              </td>
+              <td>
+                <a href="/admin/doctors/<%= doc.id %>" class="btn btn-sm btn-info">View</a>
+                <a href="/admin/doctors/<%= doc.id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+                <a href="/admin/doctors/<%= doc.id %>/delete" class="btn btn-sm btn-danger"
+                  onclick="return confirm('Are you sure?')">Delete</a>
+              </td>
+            </tr>
+            <% }) %>
+              <% } %>
+    </tbody>
+  </table>

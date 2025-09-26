@@ -1,0 +1,12 @@
+<h1>Patient: <%= patient.name %></h1>
+<p>Email: <%= patient.User.email %></p>
+<p>Phone: <%= patient.phone %></p>
+<p>Gender: <%= patient.gender %></p>
+<p>Patient Code: <%= patient.patientCode %></p>
+
+<h2>Appointments</h2>
+<ul>
+  <% patient.Appointments.forEach(app => { %>
+    <li><%= app.appointmentDate.toDateString() %> - <%= app.reason %></li>
+  <% }) %>
+</ul>

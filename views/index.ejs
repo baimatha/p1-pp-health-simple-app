@@ -1,0 +1,19 @@
+<div class="text-center py-5">
+  <h1 class="mb-3">Welcome to Medical System</h1>
+  <p class="lead mb-4">
+    A simple platform to manage doctors, patients, and appointments with ease.
+  </p>
+
+  <% if (!session.user) { %>
+    <a href="/login" class="btn btn-primary btn-lg me-2">Login</a>
+    <a href="/register" class="btn btn-outline-secondary btn-lg">Register</a>
+  <% } else { %>
+    <% if (session.user.role === "admin") { %>
+      <a href="/admin" class="btn btn-success btn-lg">Go to Admin Dashboard</a>
+    <% } else if (session.user.role === "doctor") { %>
+      <a href="/doctor/dashboard" class="btn btn-success btn-lg">Go to Doctor Dashboard</a>
+    <% } else if (session.user.role === "patient") { %>
+      <a href="/patient/dashboard" class="btn btn-success btn-lg">Go to Patient Dashboard</a>
+    <% } %>
+  <% } %>
+</div>

@@ -1,0 +1,28 @@
+<h2 class="mb-4">Patient Inbox</h2>
+
+<ul class="list-group">
+  <% if (messages && messages.length > 0) { %>
+    <% messages.forEach(msg => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong><%= msg.title %></strong><br>
+          From: <%= msg.User ? msg.User.username : 'System' %><br>
+          <small class="text-muted"><%= msg.createdAt.toLocaleString() %></small><br>
+          <p class="mb-1"><%= msg.content %></p>
+        </div>
+
+        <div>
+          <% if (msg.title === "Consultation Scheduled" && msg.AppointmentId) { %>
+            <a href="/appointments/<%= msg.AppointmentId %>" class="btn btn-sm btn-info">
+              View Appointment
+            </a>
+          <% } else { %>
+            <a href="/inbox/<%= msg.id %>" class="btn btn-sm btn-outline-info">View</a>
+          <% } %>
+        </div>
+      </li>
+    <% }) %>
+  <% } else { %>
+    <li class="list-group-item">No messages yet.</li>
+  <% } %>
+</ul>
